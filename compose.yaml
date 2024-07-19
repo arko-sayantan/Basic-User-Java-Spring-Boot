@@ -1,0 +1,55 @@
+# Comments are provided throughout this file to help you get started.
+# If you need more help, visit the Docker Compose reference guide at
+# https://docs.docker.com/go/compose-spec-reference/
+
+# Here the instructions define your application as a service called "server".
+# This service is built from the Dockerfile in the current directory.
+# You can add other services your application may depend on here, such as a
+# database or a cache. For examples, see the Awesome Compose repository:
+# https://github.com/docker/awesome-compose
+# version: '3'
+# services:
+#   db:
+#     container_name: db
+#     image: mysql:8.0.27
+#     ports:
+#       - "3305:3306"
+#     environment:
+#       DATABASE_HOST: docker-mysql
+#       DATABASE_PORT: 3306
+#       MYSQL_ROOT_PASSWORD: root
+#       MYSQL_DATABASE: UserDb
+#       MYSQL_USER: root
+#       MYSQL_PASSWORD: root
+#   app:
+#     image: myapp
+#     ports: 
+#       - "8086:8082"
+#     environment:
+#       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/UserDb
+#       SPRING_DATASOURCE_USERNAME: root
+#       SPRING_DATASOURCE_PASSWORD: root
+#     depends_on:
+#       - db
+version: '3'
+services:
+  db:
+    container_name: db
+    image: mysql:8.0.27
+    ports:
+      - "3305:3306"
+    environment:
+      DATABASE_HOST: docker-mysql
+      DATABASE_PORT: 3306
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: UserDb
+  app:
+    image: myapp
+    ports: 
+      - "8086:8082"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/UserDb
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    depends_on:
+      - db
